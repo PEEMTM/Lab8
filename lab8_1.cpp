@@ -2,11 +2,15 @@
 #include<iomanip> //For using setw(), setprecision(), ...
 using namespace std;
 
-int main(){	
+int main(){
+	double loan,percent,money,interest=0,total,payment,balance;
+	int i=1;
 	cout << "Enter initial loan: ";
+	cin>>loan;
 	cout << "Enter interest rate per year (%): ";
+	cin>>percent;
 	cout << "Enter amount you can pay per year: ";
-
+	cin>>money;
 	//use 'setw' to set width of table and 'left' to set left-alignment
 	//you can change input argument of 'setw()' to see the effect
 	//Try to change from 'left' to 'right' and see the effect
@@ -20,14 +24,24 @@ int main(){
 	
 	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
 	//you can change input argument of 'setprecision()' to see the effect
+	balance=loan;
+	do{
+	loan=balance;
+	interest=(percent*balance)/100;
+	total=loan+interest;
+	payment=money;
+	if(payment>total) payment=total;
+	balance=total-payment;
 	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
-	
+	cout << setw(13) << left << i; 
+	cout << setw(13) << left << loan;
+	cout << setw(13) << left << interest;
+	cout << setw(13) << left << total;
+	cout << setw(13) << left << payment;
+	cout << setw(13) << left << balance;
+	cout << "\n";
+	i++;
+	if(balance<=0) break;	
+	}while(true);
 	return 0;
 }
